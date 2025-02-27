@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 10px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+h2 {
+    color: #444;
+    margin-bottom: 15px;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.game-area {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.main-board-section,
+.pieces-section {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.main-board {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(8, 40px);
+    gap: 2px;
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.pieces-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.piece-board-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.piece-board {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(25px, 40px));
+    grid-template-rows: repeat(5, minmax(25px, 40px));
+    gap: 2px;
+    background-color: #ddd;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.cell {
+    background-color: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    aspect-ratio: 1;
+    touch-action: manipulation;
+}
+
+.cell.selected {
+    background-color: #4CAF50;
+}
+
+.clear-btn {
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    touch-action: manipulation;
+}
+
+.clear-btn:hover {
+    background-color: #d32f2f;
+}
+
+.solve-btn {
+    padding: 12px 24px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    transition: background-color 0.2s;
+    touch-action: manipulation;
+}
+
+.solve-btn:hover {
+    background-color: #1976D2;
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.solution {
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: none;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.solution.visible {
+    display: block;
+}
+
+.solution h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.solution h4 {
+    margin: 15px 0 10px;
+    color: #444;
+}
+
+.solution-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.solution-step {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.solution-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(8, 40px);
+    gap: 2px;
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px auto;
+    width: fit-content;
+    transition: opacity 0.3s ease;
+}
+
+.solution-grid.clearing {
+    opacity: 0.7;
+}
+
+.lines-cleared {
+    color: #2196F3;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.lines-info {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.lines-info p {
+    margin: 5px 0;
+    color: #1976D2;
+}
+
+.after-clearing {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px dashed #e0e0e0;
+}
+
+.after-clearing h5 {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+.continue-btn {
+    display: block;
+    padding: 8px 16px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 15px auto 0;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+    width: 100%;
+    max-width: 200px;
+}
+
+.continue-btn:hover {
+    background-color: #1976D2;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.continue-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .main-board-section {
+        flex: 0 1 auto;
+    }
+    
+    .pieces-section {
+        flex: 1 1 auto;
+    }
+    
+    body {
+        padding: 20px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-area {
+        gap: 15px;
+    }
+    
+    .pieces-container {
+        gap: 10px;
+    }
+    
+    .main-board-section,
+    .pieces-section {
+        padding: 10px;
+    }
+    
+    .main-board,
+    .solution-grid {
+        grid-template-columns: repeat(8, 35px);
+        grid-template-rows: repeat(8, 35px);
+        padding: 8px;
+        gap: 1px;
+    }
+    
+    .piece-board {
+        padding: 5px;
+    }
+
+    .solution-step {
+        padding: 10px;
+    }
+}
+
+/* Prevent zoom on iOS */
+@supports (-webkit-touch-callout: none) {
+    input,
+    button {
+        font-size: 16px;
+    }
+}

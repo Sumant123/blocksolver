@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SP BlockBlast Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SP BlockBlast Solver</h1>
+        
+        <div class="game-area">
+            <div class="main-board-section">
+                <h2>Current Board</h2>
+                <div class="main-board" id="mainBoard"></div>
+                <button class="clear-btn" onclick="clearGrid('mainBoard')">Clear Board</button>
+            </div>
+
+            <div class="pieces-section">
+                <h2>Available Pieces</h2>
+                <div class="pieces-container">
+                    <div class="piece-board-wrapper">
+                        <div class="piece-board large-piece" id="piece1"></div>
+                        <button class="clear-btn" onclick="clearGrid('piece1')">Clear</button>
+                    </div>
+                    <div class="piece-board-wrapper">
+                        <div class="piece-board large-piece" id="piece2"></div>
+                        <button class="clear-btn" onclick="clearGrid('piece2')">Clear</button>
+                    </div>
+                    <div class="piece-board-wrapper">
+                        <div class="piece-board large-piece" id="piece3"></div>
+                        <button class="clear-btn" onclick="clearGrid('piece3')">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="solve-btn" onclick="solvePuzzle()">Solve Puzzle</button>
+        </div>
+
+        <div id="solution" class="solution"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
