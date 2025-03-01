@@ -31,6 +31,25 @@ h2 {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
 }
 
+.instructions {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.5;
+}
+
+.instructions ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
 .game-area {
     display: flex;
     gap: 20px;
@@ -46,6 +65,9 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-board {
@@ -58,6 +80,8 @@ h2 {
     border-radius: 5px;
     margin: 0 auto;
     width: fit-content;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .pieces-container {
@@ -65,6 +89,7 @@ h2 {
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100%;
 }
 
 .piece-board-wrapper {
@@ -76,13 +101,16 @@ h2 {
 
 .piece-board {
     display: grid;
-    grid-template-columns: repeat(5, minmax(25px, 40px));
-    grid-template-rows: repeat(5, minmax(25px, 40px));
+    grid-template-columns: repeat(5, 35px);
+    grid-template-rows: repeat(5, 35px);
     gap: 2px;
     background-color: #ddd;
     padding: 8px;
     border-radius: 5px;
     margin: 0 auto;
+    width: fit-content;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .cell {
@@ -277,7 +305,10 @@ h2 {
     }
     
     .pieces-container {
-        gap: 10px;
+        gap: 15px;
+        padding: 5px;
+        flex-direction: column;
+        align-items: center;
     }
     
     .main-board-section,
@@ -287,18 +318,46 @@ h2 {
     
     .main-board,
     .solution-grid {
-        grid-template-columns: repeat(8, 35px);
-        grid-template-rows: repeat(8, 35px);
-        padding: 8px;
+        grid-template-columns: repeat(8, 32px);
+        grid-template-rows: repeat(8, 32px);
+        padding: 5px;
         gap: 1px;
     }
     
     .piece-board {
-        padding: 5px;
+        grid-template-columns: repeat(5, 25px);
+        grid-template-rows: repeat(5, 25px);
+        padding: 4px;
     }
 
     .solution-step {
         padding: 10px;
+    }
+
+    .piece-board-wrapper {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .clear-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        margin-top: 8px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .instructions {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .instructions ul {
+        padding-left: 16px;
+    }
+
+    .instructions li {
+        margin-bottom: 6px;
     }
 }
 

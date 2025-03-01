@@ -22,7 +22,8 @@ function createGrid(id, rows, cols) {
     
     grid.innerHTML = '';
     grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    // Don't set grid template columns here since it's handled in CSS
+    grid.style.width = 'fit-content';
     
     for (let i = 0; i < rows * cols; i++) {
         const cell = document.createElement('div');
@@ -66,7 +67,8 @@ function updateMainBoard(newBoardState) {
         const row = Math.floor(index / 8);
         const col = index % 8;
         cell.classList.remove('selected');
-        if (newBoardState[row][col] === 1) {
+        // Consider any non-zero value as selected
+        if (newBoardState[row][col] > 0) {
             cell.classList.add('selected');
         }
     });
@@ -358,7 +360,7 @@ function solvePuzzle() {
             // Show board after piece placement
             stepDiv.appendChild(createBoardVisual(step.boardState, step.clearedLines));
             
-            // If lines were cleared, show the clearing and resulting board
+            // If lines were cleared, show the clearing information and resulting board
             if (step.linesCleared > 0) {
                 const clearingInfo = document.createElement('div');
                 clearingInfo.className = 'lines-info';
@@ -373,18 +375,11 @@ function solvePuzzle() {
                 
                 stepDiv.appendChild(clearingInfo);
                 
-                // Show board after clearing with continue button
+                // Show board after clearing
                 const afterClearingDiv = document.createElement('div');
                 afterClearingDiv.className = 'after-clearing';
                 afterClearingDiv.innerHTML = '<h5>Board after clearing lines:</h5>';
                 afterClearingDiv.appendChild(createBoardVisual(step.boardAfterClearing));
-                
-                const continueButton = document.createElement('button');
-                continueButton.className = 'continue-btn';
-                continueButton.textContent = 'Continue with this board';
-                continueButton.onclick = () => updateMainBoard(step.boardAfterClearing);
-                afterClearingDiv.appendChild(continueButton);
-                
                 stepDiv.appendChild(afterClearingDiv);
             }
             
@@ -392,6 +387,23 @@ function solvePuzzle() {
         });
         
         instructions += '</div>';
+        
+        // Add final board state and continue button
+        const finalStep = solution[solution.length - 1];
+        const finalBoard = finalStep.linesCleared > 0 ? finalStep.boardAfterClearing : finalStep.boardState;
+        
+        const finalStepDiv = document.createElement('div');
+        finalStepDiv.className = 'solution-step';
+        finalStepDiv.innerHTML = '<h4>Final Board</h4>';
+        finalStepDiv.appendChild(createBoardVisual(finalBoard));
+        
+        const continueButton = document.createElement('button');
+        continueButton.className = 'continue-btn';
+        continueButton.textContent = 'Continue with this board';
+        continueButton.onclick = () => updateMainBoard(finalBoard);
+        finalStepDiv.appendChild(continueButton);
+        
+        solutionDiv.appendChild(finalStepDiv);
     } else {
         solutionDiv.innerHTML = `
             <h3>No solution found!</h3>
