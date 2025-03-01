@@ -240,12 +240,12 @@ function createBoardVisual(board, completedLines = null) {
 // Get color for board value
 function getColorForValue(value) {
     switch(value) {
-        case 0: return 'white';
-        case 1: return '#666'; // blocked cells
-        case 2: return '#4CAF50'; // piece 1
-        case 3: return '#2196F3'; // piece 2
-        case 4: return '#FFC107'; // piece 3
-        default: return 'white';
+        case 0: return 'rgba(255, 255, 255, 0.05)';
+        case 1: return 'rgba(255, 255, 255, 0.2)'; // blocked cells
+        case 2: return '#00c3ff'; // piece 1
+        case 3: return '#0066ff'; // piece 2
+        case 4: return '#00ffaa'; // piece 3
+        default: return 'rgba(255, 255, 255, 0.05)';
     }
 }
 
